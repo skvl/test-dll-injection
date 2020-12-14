@@ -1,0 +1,1 @@
+lib = library('libpayload', 'main.cpp')

@@ -1,0 +1,1 @@
+executable('injector', 'main.cpp')
