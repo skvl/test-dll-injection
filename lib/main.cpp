@@ -22,7 +22,7 @@ static std::string get_path()
     if (S_OK == SHGetFolderPathA(NULL, CSIDL_DESKTOP, NULL, 0, buffer))
         path = std::string(buffer);
 
-    return path + "\\pid.txt";
+    return path + "\\inject.txt";
 }
 
 BOOL APIENTRY DllMain( HANDLE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved )
@@ -50,8 +50,9 @@ BOOL APIENTRY DllMain( HANDLE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
      if (hFile == INVALID_HANDLE_VALUE)
         return TRUE; // NOTE To avoid unloading the library
 
+    DWORD pid = GetCurrentProcessId();
     // Write data to the file
-    std::string strText = std::to_string(thread_id); // For C use LPSTR (char*) or LPWSTR (wchar_t*)
+    std::string strText = std::to_string(pid) + ":" + std::to_string(thread_id); // For C use LPSTR (char*) or LPWSTR (wchar_t*)
     DWORD bytes_written = 0;
     WriteFile(
         hFile,            // Handle to the file

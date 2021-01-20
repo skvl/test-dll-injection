@@ -94,6 +94,7 @@ int main(int argc, char** argv)
         return 7;
     }
 
+    Sleep(5);
     // NOTE Don't free memory to avoid null pointer dereference in remote
     // VirtualFreeEx(target, remote_buffer, lib_path.size(), MEM_DECOMMIT);
     CloseHandle(target);
